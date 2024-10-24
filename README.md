@@ -4,6 +4,6 @@ University lab on Design Patterns
 
 ## Lab Structure
 
-### [LB1](https://github.com/lab_patterns/LB1):
+### [LB1](https://github.com/treenoder/lab_patterns/tree/main/LB1/AbstractFactory):
 
-- **Task1** (Python): Abstract Factory Pattern (Creational Pattern)
+- **Task1** (Python | Creational Pattern): Abstract Factory Pattern
