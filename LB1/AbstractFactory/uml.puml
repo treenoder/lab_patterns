@@ -1,0 +1,87 @@
+@startuml
+
+interface Chair {
+    + sit_on() : void
+}
+
+interface Sofa {
+    + lie_on() : void
+}
+
+interface CoffeeTable {
+    + look_at() : void
+}
+
+interface FurnitureFactory {
+    + create_chair() : Chair
+    + create_sofa() : Sofa
+    + create_coffee_table() : CoffeeTable
+}
+
+class ModernChair implements Chair {
+    + sit_on() : void
+}
+
+class VictorianChair implements Chair {
+    + sit_on() : void
+}
+
+class ClassicChair implements Chair {
+    + sit_on() : void
+}
+
+class ModernSofa implements Sofa {
+    + lie_on() : void
+}
+
+class VictorianSofa implements Sofa {
+    + lie_on() : void
+}
+
+class ClassicSofa implements Sofa {
+    + lie_on() : void
+}
+
+class ModernCoffeeTable implements CoffeeTable {
+    + look_at() : void
+}
+
+class VictorianCoffeeTable implements CoffeeTable {
+    + look_at() : void
+}
+
+class ClassicCoffeeTable implements CoffeeTable {
+    + look_at() : void
+}
+
+class ModernFurnitureFactory implements FurnitureFactory {
+    + create_chair() : Chair
+    + create_sofa() : Sofa
+    + create_coffee_table() : CoffeeTable
+}
+
+class VictorianFurnitureFactory implements FurnitureFactory {
+    + create_chair() : Chair
+    + create_sofa() : Sofa
+    + create_coffee_table() : CoffeeTable
+}
+
+class ClassicFurnitureFactory implements FurnitureFactory {
+    + create_chair() : Chair
+    + create_sofa() : Sofa
+    + create_coffee_table() : CoffeeTable
+}
+
+ModernFurnitureFactory o-- ModernChair
+ModernFurnitureFactory o-- ModernSofa
+ModernFurnitureFactory o-- ModernCoffeeTable
+
+VictorianFurnitureFactory o-- VictorianChair
+VictorianFurnitureFactory o-- VictorianSofa
+VictorianFurnitureFactory o-- VictorianCoffeeTable
+
+ClassicFurnitureFactory o-- ClassicChair
+ClassicFurnitureFactory o-- ClassicSofa
+ClassicFurnitureFactory o-- ClassicCoffeeTable
+
+@enduml
