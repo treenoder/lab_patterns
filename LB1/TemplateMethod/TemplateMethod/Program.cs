@@ -10,10 +10,53 @@ namespace TemplateMethod
         public static void Main(string[] args)
         {
             RunCompany();
+            // Order received: Individual Order
+            // Validated individual order
+            // Payment was processed
+            // Shipped individual order
+            // =====================================
+            // Order received: Corporate Order
+            // Validated corporate order
+            // Payment was processed
+            // Shipped corporate order
             Console.WriteLine("*************************************");
             RunReport();
+            // Data aggregated
+            // Data formatted
+            // Exported HTML report
+            // =====================================
+            // Data aggregated
+            // Data formatted
+            // Exported PDF report
+            // =====================================
+            // Data aggregated
+            // Data formatted
+            // Exported Excel report
             Console.WriteLine("*************************************");
             RunMonitor();
+            // Collected web server data
+            // RPS: 1000
+            // CPU: 20%
+            // Memory: 50%
+            // Response time: 100ms
+            // Analyzed web server data
+            // Stored monitor report
+            // =====================================
+            // Collected database server data
+            // Queries per second: 100
+            // CPU: 50%
+            // Memory: 70%
+            // Disk usage: 80%
+            // Analyzed database server data
+            // Stored monitor report
+            // =====================================
+            // Collected file server data
+            // Files: 1000
+            // CPU: 10%
+            // Memory: 30%
+            // Disk usage: 90%
+            // Analyzed file server data
+            // Stored monitor report
         }
 
         private static void RunCompany()

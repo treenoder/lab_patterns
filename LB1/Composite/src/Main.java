@@ -8,10 +8,29 @@ import projects.TaskLeaf;
 public class Main {
     public static void main(String[] args) {
         runDepartments();
+        //Company: Company
+        //Company budget: 9000
+        //Company workers: 6
         System.out.println("********************");
         runCatalogue();
+        //Catalogue: Catalogue
+        //Catalogue items: 6
+        //-->Catalogue
+        //-->Online Shop
+        //T-shirt
+        //Jeans
+        //-->Electronics
+        //-->Phone
+        //Samsung
+        //iPhone
+        //-->Laptop
+        //Dell
+        //HP
         System.out.println("********************");
         runProjects();
+        //Project: Main Project
+        //Project tasks: 4
+        //Project estimate: 100
     }
 
     private static void runDepartments() {

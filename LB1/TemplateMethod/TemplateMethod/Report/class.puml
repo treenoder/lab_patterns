@@ -1,0 +1,27 @@
+@startuml class_diagram_template_method_report
+namespace TemplateMethod.Report {
+    abstract class ReportGenerator {
+        + GenerateReport(): void
+        # ExportData(data: Object): void
+        - AggregateData(): Object
+        - FormatData(data: Object): Object
+    }
+
+    class HTMLReportGenerator {
+        # ExportData(data: Object): void
+    }
+
+    class PDFReportGenerator {
+        # ExportData(data: Object): void
+    }
+
+    class ExcelReportGenerator {
+        # ExportData(data: Object): void
+    }
+}
+
+TemplateMethod.Report.ReportGenerator <|-- TemplateMethod.Report.HTMLReportGenerator
+TemplateMethod.Report.ReportGenerator <|-- TemplateMethod.Report.PDFReportGenerator
+TemplateMethod.Report.ReportGenerator <|-- TemplateMethod.Report.ExcelReportGenerator
+
+@enduml

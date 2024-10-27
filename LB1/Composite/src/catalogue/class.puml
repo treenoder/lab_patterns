@@ -1,0 +1,47 @@
+@startuml
+' Інтерфейси
+interface IComponent {
+    +String getName()
+    +int countOfItems()
+    +void listItems()
+}
+
+' Абстрактний клас Composite
+abstract class Composite {
+    +void add(IComponent item)
+    +void remove(IComponent item)
+}
+
+' Класи, що реалізують IComponent
+class ProductLeaf {
+    -String name
+    +ProductLeaf(String name)
+    +String getName()
+    +int countOfItems()
+    +void listItems()
+}
+
+class CategoryComposite {
+    -List<IComponent> items
+    -String name
+    +CategoryComposite(String name)
+    +void add(IComponent item)
+    +void remove(IComponent item)
+    +String getName()
+    +int countOfItems()
+    +void listItems()
+}
+
+class Main {
+    +main(String[] args)
+    -runCatalogue()
+}
+
+' Відносини
+IComponent <|.. Composite
+IComponent <|.. ProductLeaf
+Composite <|-- CategoryComposite
+CategoryComposite --> IComponent : contains
+Main --> CategoryComposite
+Main --> ProductLeaf
+@enduml

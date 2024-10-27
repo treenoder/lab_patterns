@@ -1,93 +1,100 @@
-@startuml
-
-interface Chair {
-    + sit_on() : void
+@startuml class_diagram
+abstract class FurnitureFactory {
+    +create_chair(): Chair
+    +create_sofa(): Sofa
+    +create_coffee_table(): CoffeeTable
 }
 
-interface Sofa {
-    + lie_on() : void
+class ClassicFurnitureFactory {
+    +create_chair(): Chair
+    +create_sofa(): Sofa
+    +create_coffee_table(): CoffeeTable
 }
 
-interface CoffeeTable {
-    + look_at() : void
+class ModernFurnitureFactory {
+    +create_chair(): Chair
+    +create_sofa(): Sofa
+    +create_coffee_table(): CoffeeTable
 }
 
-interface FurnitureFactory {
-    + create_chair() : Chair
-    + create_sofa() : Sofa
-    + create_coffee_table() : CoffeeTable
+class VictorianFurnitureFactory {
+    +create_chair(): Chair
+    +create_sofa(): Sofa
+    +create_coffee_table(): CoffeeTable
 }
 
-class ModernChair implements Chair {
-    + sit_on() : void
+abstract class Chair {
+    +sit_on(): String
 }
 
-class VictorianChair implements Chair {
-    + sit_on() : void
+abstract class Sofa {
+    +lie_on(): String
 }
 
-class ClassicChair implements Chair {
-    + sit_on() : void
+abstract class CoffeeTable {
+    +look_at(): String
 }
 
-class ModernSofa implements Sofa {
-    + lie_on() : void
+class ClassicChair {
+    +sit_on(): String
 }
 
-class VictorianSofa implements Sofa {
-    + lie_on() : void
+class ClassicSofa {
+    +lie_on(): String
 }
 
-class ClassicSofa implements Sofa {
-    + lie_on() : void
+class ClassicCoffeeTable {
+    +look_at(): String
 }
 
-class ModernCoffeeTable implements CoffeeTable {
-    + look_at() : void
+class ModernChair {
+    +sit_on(): String
 }
 
-class VictorianCoffeeTable implements CoffeeTable {
-    + look_at() : void
+class ModernSofa {
+    +lie_on(): String
 }
 
-class ClassicCoffeeTable implements CoffeeTable {
-    + look_at() : void
+class ModernCoffeeTable {
+    +look_at(): String
 }
 
-class ModernFurnitureFactory implements FurnitureFactory {
-    + create_chair() : Chair
-    + create_sofa() : Sofa
-    + create_coffee_table() : CoffeeTable
+class VictorianChair {
+    +sit_on(): String
 }
 
-class VictorianFurnitureFactory implements FurnitureFactory {
-    + create_chair() : Chair
-    + create_sofa() : Sofa
-    + create_coffee_table() : CoffeeTable
+class VictorianSofa {
+    +lie_on(): String
 }
 
-class ClassicFurnitureFactory implements FurnitureFactory {
-    + create_chair() : Chair
-    + create_sofa() : Sofa
-    + create_coffee_table() : CoffeeTable
+class VictorianCoffeeTable {
+    +look_at(): String
 }
 
 class FurnitureCompany {
-    + present_furniture(factory : FurnitureFactory) : void
+    -name: String
+    +present_furniture(factory: FurnitureFactory): void
 }
 
-FurnitureCompany o-- FurnitureFactory
+FurnitureFactory <|-- ClassicFurnitureFactory
+FurnitureFactory <|-- ModernFurnitureFactory
+FurnitureFactory <|-- VictorianFurnitureFactory
 
-ModernFurnitureFactory o-- ModernChair
-ModernFurnitureFactory o-- ModernSofa
-ModernFurnitureFactory o-- ModernCoffeeTable
+Chair <|-- ClassicChair
+Chair <|-- ModernChair
+Chair <|-- VictorianChair
 
-VictorianFurnitureFactory o-- VictorianChair
-VictorianFurnitureFactory o-- VictorianSofa
-VictorianFurnitureFactory o-- VictorianCoffeeTable
+Sofa <|-- ClassicSofa
+Sofa <|-- ModernSofa
+Sofa <|-- VictorianSofa
 
-ClassicFurnitureFactory o-- ClassicChair
-ClassicFurnitureFactory o-- ClassicSofa
-ClassicFurnitureFactory o-- ClassicCoffeeTable
+CoffeeTable <|-- ClassicCoffeeTable
+CoffeeTable <|-- ModernCoffeeTable
+CoffeeTable <|-- VictorianCoffeeTable
+
+FurnitureCompany --> FurnitureFactory
+FurnitureCompany --> Chair
+FurnitureCompany --> Sofa
+FurnitureCompany --> CoffeeTable
 
 @enduml

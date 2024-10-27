@@ -1,0 +1,87 @@
+@startuml
+actor User
+participant Main
+participant CategoryComposite as Catalogue
+participant CategoryComposite as OnlineShop
+participant CategoryComposite as Electronics
+participant CategoryComposite as Phone
+participant CategoryComposite as Laptop
+participant ProductLeaf as TShirt
+participant ProductLeaf as Jeans
+participant ProductLeaf as Samsung
+participant ProductLeaf as iPhone
+participant ProductLeaf as Dell
+participant ProductLeaf as HP
+
+User -> Main: запускає main()
+Main -> Main: викликає runCatalogue()
+Main -> Catalogue: new CategoryComposite("Catalogue")
+Main -> OnlineShop: new CategoryComposite("Online Shop")
+Main -> TShirt: new ProductLeaf("T-shirt")
+Main -> Jeans: new ProductLeaf("Jeans")
+OnlineShop -> OnlineShop: add(TShirt)
+OnlineShop -> OnlineShop: add(Jeans)
+Catalogue -> Catalogue: add(OnlineShop)
+Main -> Electronics: new CategoryComposite("Electronics")
+Main -> Phone: new CategoryComposite("Phone")
+Main -> Samsung: new ProductLeaf("Samsung")
+Main -> iPhone: new ProductLeaf("iPhone")
+Phone -> Phone: add(Samsung)
+Phone -> Phone: add(iPhone)
+Electronics -> Electronics: add(Phone)
+Main -> Laptop: new CategoryComposite("Laptop")
+Main -> Dell: new ProductLeaf("Dell")
+Main -> HP: new ProductLeaf("HP")
+Laptop -> Laptop: add(Dell)
+Laptop -> Laptop: add(HP)
+Electronics -> Electronics: add(Laptop)
+Catalogue -> Catalogue: add(Electronics)
+Main -> Main: System.out.println("Catalogue: " + catalogue.getName())
+Main -> Catalogue: getName()
+Catalogue --> Main: "Catalogue"
+Main -> Main: System.out.println("Catalogue items: " + catalogue.countOfItems())
+Main -> Catalogue: countOfItems()
+Catalogue -> OnlineShop: countOfItems()
+OnlineShop -> TShirt: countOfItems()
+TShirt --> OnlineShop: 1
+OnlineShop -> Jeans: countOfItems()
+Jeans --> OnlineShop: 1
+OnlineShop --> Catalogue: 2
+Catalogue -> Electronics: countOfItems()
+Electronics -> Phone: countOfItems()
+Phone -> Samsung: countOfItems()
+Samsung --> Phone: 1
+Phone -> iPhone: countOfItems()
+iPhone --> Phone: 1
+Phone --> Electronics: 2
+Electronics -> Laptop: countOfItems()
+Laptop -> Dell: countOfItems()
+Dell --> Laptop: 1
+Laptop -> HP: countOfItems()
+HP --> Laptop: 1
+Laptop --> Electronics: 2
+Electronics --> Catalogue: 4
+Catalogue --> Main: 6
+Main -> Catalogue: listItems()
+Catalogue -> Catalogue: listItems()
+Catalogue -> OnlineShop: listItems()
+OnlineShop -> OnlineShop: listItems()
+OnlineShop -> TShirt: listItems()
+TShirt --> OnlineShop: "T-shirt"
+OnlineShop -> Jeans: listItems()
+Jeans --> OnlineShop: "Jeans"
+Catalogue -> Electronics: listItems()
+Electronics -> Electronics: listItems()
+Electronics -> Phone: listItems()
+Phone -> Phone: listItems()
+Phone -> Samsung: listItems()
+Samsung --> Phone: "Samsung"
+Phone -> iPhone: listItems()
+iPhone --> Phone: "iPhone"
+Electronics -> Laptop: listItems()
+Laptop -> Laptop: listItems()
+Laptop -> Dell: listItems()
+Dell --> Laptop: "Dell"
+Laptop -> HP: listItems()
+HP --> Laptop: "HP"
+@enduml

@@ -1,0 +1,29 @@
+@startuml sequence_diagram_template_method
+actor User
+participant Program
+participant "OrderProcessor" as Processor
+participant "IndividualOrderProcessor" as IndividualProcessor
+participant "CorporateOrderProcessor" as CorporateProcessor
+participant Order
+
+User -> Program: Main()
+Program -> Program: RunCompany()
+Program -> IndividualProcessor: ProcessOrder(individualOrder)
+IndividualProcessor -> Processor: ReceiveOrder(order)
+Processor -> IndividualProcessor: IsValidOrder()
+IndividualProcessor --> Processor: true
+Processor -> Processor: ProcessPayment()
+Processor -> IndividualProcessor: ShipOrder()
+IndividualProcessor --> Processor:
+Processor -> Program:
+
+Program -> Program: Print Separator
+Program -> CorporateProcessor: ProcessOrder(corporateOrder)
+CorporateProcessor -> Processor: ReceiveOrder(order)
+Processor -> CorporateProcessor: IsValidOrder()
+CorporateProcessor --> Processor: true
+Processor -> Processor: ProcessPayment()
+Processor -> CorporateProcessor: ShipOrder()
+CorporateProcessor --> Processor:
+Processor -> Program:
+@enduml

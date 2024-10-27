@@ -1,0 +1,48 @@
+@startuml
+' Інтерфейси
+interface IComponent {
+    +int getBudget()
+    +int countOfWorkers()
+}
+
+' Абстрактний клас Composite
+abstract class Composite {
+    -String name
+    +Composite(String name)
+    +String getName()
+    +void add(IComponent worker)
+    +void remove(IComponent worker)
+    +int getBudget()
+    +int countOfWorkers()
+}
+
+' Класи, що реалізують IComponent
+class EmployeeLeaf {
+    -int salary
+    +EmployeeLeaf(int salary)
+    +int getBudget()
+    +int countOfWorkers()
+}
+
+class DepartmentComposite {
+    -List<IComponent> workers
+    +DepartmentComposite(String name)
+    +void add(IComponent worker)
+    +void remove(IComponent worker)
+    +int getBudget()
+    +int countOfWorkers()
+}
+
+class Main {
+    +main(String[] args)
+    -runDepartments()
+}
+
+' Відносини
+IComponent <|.. Composite
+IComponent <|.. EmployeeLeaf
+Composite <|-- DepartmentComposite
+DepartmentComposite --> IComponent : contains
+Main --> DepartmentComposite
+Main --> EmployeeLeaf
+@enduml

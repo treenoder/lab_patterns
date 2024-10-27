@@ -1,0 +1,38 @@
+@startuml sequence_diagram_template_method_monitor
+actor User
+participant Program
+participant "WebServerMonitor" as WebMonitor
+participant "DatabaseServerMonitor" as DBMonitor
+participant "FileServerMonitor" as FileMonitor
+participant "ServerMonitor" as BaseMonitor
+
+User -> Program: Main()
+Program -> Program: RunMonitor()
+Program -> WebMonitor: Monitor()
+WebMonitor -> BaseMonitor: CollectData()
+BaseMonitor --> WebMonitor: data
+WebMonitor -> BaseMonitor: AnalyzeData(data)
+BaseMonitor --> WebMonitor: report
+WebMonitor -> BaseMonitor: Store(report)
+WebMonitor --> Program:
+
+Program -> Program: Print Separator
+Program -> DBMonitor: Monitor()
+DBMonitor -> BaseMonitor: CollectData()
+BaseMonitor --> DBMonitor: data
+DBMonitor -> BaseMonitor: AnalyzeData(data)
+BaseMonitor --> DBMonitor: report
+DBMonitor -> BaseMonitor: Store(report)
+DBMonitor --> Program:
+
+Program -> Program: Print Separator
+Program -> FileMonitor: Monitor()
+FileMonitor -> BaseMonitor: CollectData()
+BaseMonitor --> FileMonitor: data
+FileMonitor -> BaseMonitor: AnalyzeData(data)
+BaseMonitor --> FileMonitor: report
+FileMonitor -> BaseMonitor: Store(report)
+FileMonitor --> Program:
+
+Program --> User: Display monitor statuses
+@enduml

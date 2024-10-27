@@ -1,0 +1,35 @@
+@startuml sequence_diagram_template_method_report
+actor User
+participant Program
+participant "HTMLReportGenerator" as HTMLGen
+participant "PDFReportGenerator" as PDFGen
+participant "ExcelReportGenerator" as ExcelGen
+participant ReportGenerator as BaseGen
+
+User -> Program: Main()
+Program -> Program: RunReport()
+Program -> HTMLGen: GenerateReport()
+HTMLGen -> BaseGen: AggregateData()
+BaseGen --> HTMLGen: data
+HTMLGen -> BaseGen: FormatData(data)
+BaseGen --> HTMLGen: formattedData
+HTMLGen -> HTMLGen: ExportData(formattedData)
+HTMLGen --> Program:
+Program -> Program: Print Separator
+Program -> PDFGen: GenerateReport()
+PDFGen -> BaseGen: AggregateData()
+BaseGen --> PDFGen: data
+PDFGen -> BaseGen: FormatData(data)
+BaseGen --> PDFGen: formattedData
+PDFGen -> PDFGen: ExportData(formattedData)
+PDFGen --> Program:
+Program -> Program: Print Separator
+Program -> ExcelGen: GenerateReport()
+ExcelGen -> BaseGen: AggregateData()
+BaseGen --> ExcelGen: data
+ExcelGen -> BaseGen: FormatData(data)
+BaseGen --> ExcelGen: formattedData
+ExcelGen -> ExcelGen: ExportData(formattedData)
+ExcelGen --> Program:
+Program --> User: Display report statuses
+@enduml

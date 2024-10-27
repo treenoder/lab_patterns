@@ -1,0 +1,37 @@
+@startuml class_diagram_template_method
+namespace TemplateMethod.Company {
+    struct Order {
+        - Type: OrderType
+        + Order(type: OrderType)
+        + ToString(): String
+    }
+
+    enum OrderType {
+        Individual
+        Corporate
+    }
+
+    abstract class OrderProcessor {
+        + ProcessOrder(order: Order): void
+        # IsValidOrder(): bool
+        # ShipOrder(): void
+        - ReceiveOrder(order: Order): void
+        - ProcessPayment(): void
+    }
+
+    class IndividualOrderProcessor {
+        # IsValidOrder(): bool
+        # ShipOrder(): void
+    }
+
+    class CorporateOrderProcessor {
+        # IsValidOrder(): bool
+        # ShipOrder(): void
+    }
+}
+
+TemplateMethod.Company.OrderProcessor <|-- TemplateMethod.Company.IndividualOrderProcessor
+TemplateMethod.Company.OrderProcessor <|-- TemplateMethod.Company.CorporateOrderProcessor
+
+TemplateMethod.Company.OrderProcessor ..> TemplateMethod.Company.Order : uses
+@enduml

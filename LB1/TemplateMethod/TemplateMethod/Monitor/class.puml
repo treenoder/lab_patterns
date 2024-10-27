@@ -1,0 +1,29 @@
+@startuml class_diagram_template_method_monitor
+namespace TemplateMethod.Monitor {
+    abstract class ServerMonitor {
+        + Monitor(): void
+        # CollectData(): Object
+        # AnalyzeData(data: Object): Object
+        - Store(report: Object): void
+    }
+
+    class WebServerMonitor {
+        # CollectData(): Object
+        # AnalyzeData(data: Object): Object
+    }
+
+    class DatabaseServerMonitor {
+        # CollectData(): Object
+        # AnalyzeData(data: Object): Object
+    }
+
+    class FileServerMonitor {
+        # CollectData(): Object
+        # AnalyzeData(data: Object): Object
+    }
+}
+
+TemplateMethod.Monitor.ServerMonitor <|-- TemplateMethod.Monitor.WebServerMonitor
+TemplateMethod.Monitor.ServerMonitor <|-- TemplateMethod.Monitor.DatabaseServerMonitor
+TemplateMethod.Monitor.ServerMonitor <|-- TemplateMethod.Monitor.FileServerMonitor
+@enduml

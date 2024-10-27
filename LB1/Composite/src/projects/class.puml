@@ -1,0 +1,48 @@
+@startuml
+' Інтерфейси
+interface IComponent {
+    +String getName()
+    +int countOfTasks()
+    +int getEstimate()
+}
+
+' Абстрактний клас Composite
+abstract class Composite {
+    +void add(IComponent task)
+    +void remove(IComponent task)
+}
+
+' Класи, що реалізують IComponent
+class TaskLeaf {
+    -String name
+    -int estimate
+    +TaskLeaf(String name, int estimate)
+    +String getName()
+    +int countOfTasks()
+    +int getEstimate()
+}
+
+class ProjectComposite {
+    -List<IComponent> items
+    -String name
+    +ProjectComposite(String name)
+    +void add(IComponent task)
+    +void remove(IComponent task)
+    +String getName()
+    +int countOfTasks()
+    +int getEstimate()
+}
+
+class Main {
+    +main(String[] args)
+    -runProjects()
+}
+
+' Відносини
+IComponent <|.. Composite
+IComponent <|.. TaskLeaf
+Composite <|-- ProjectComposite
+ProjectComposite --> IComponent : contains
+Main --> ProjectComposite
+Main --> TaskLeaf
+@enduml

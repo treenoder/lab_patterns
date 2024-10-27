@@ -1,0 +1,53 @@
+@startuml
+actor User
+participant Main
+participant ProjectComposite as MainProject
+participant TaskLeaf as Task1
+participant TaskLeaf as Task2
+participant ProjectComposite as SubProject
+participant TaskLeaf as Task3
+participant TaskLeaf as Task4
+
+User -> Main: запускає main()
+Main -> Main: викликає runProjects()
+Main -> MainProject: new ProjectComposite("Main Project")
+Main -> Task1: new TaskLeaf("Task 1", 10)
+Main -> Task2: new TaskLeaf("Task 2", 20)
+MainProject -> MainProject: add(Task1)
+MainProject -> MainProject: add(Task2)
+Main -> SubProject: new ProjectComposite("Sub Project")
+Main -> Task3: new TaskLeaf("Task 3", 30)
+Main -> Task4: new TaskLeaf("Task 4", 40)
+SubProject -> SubProject: add(Task3)
+SubProject -> SubProject: add(Task4)
+MainProject -> MainProject: add(SubProject)
+Main -> Main: System.out.println("Project: " + project.getName())
+Main -> MainProject: getName()
+MainProject --> Main: "Main Project"
+Main -> Main: System.out.println("Project tasks: " + project.countOfTasks())
+Main -> MainProject: countOfTasks()
+MainProject -> Task1: countOfTasks()
+Task1 --> MainProject: 1
+MainProject -> Task2: countOfTasks()
+Task2 --> MainProject: 1
+MainProject -> SubProject: countOfTasks()
+SubProject -> Task3: countOfTasks()
+Task3 --> SubProject: 1
+SubProject -> Task4: countOfTasks()
+Task4 --> SubProject: 1
+SubProject --> MainProject: 2
+MainProject --> Main: 4
+Main -> Main: System.out.println("Project estimate: " + project.getEstimate())
+Main -> MainProject: getEstimate()
+MainProject -> Task1: getEstimate()
+Task1 --> MainProject: 10
+MainProject -> Task2: getEstimate()
+Task2 --> MainProject: 20
+MainProject -> SubProject: getEstimate()
+SubProject -> Task3: getEstimate()
+Task3 --> SubProject: 30
+SubProject -> Task4: getEstimate()
+Task4 --> SubProject: 40
+SubProject --> MainProject: 70
+MainProject --> Main: 100
+@enduml
