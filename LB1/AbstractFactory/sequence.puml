@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+@startuml
+
+@startuml
+autonumber
+
+actor Client
+
+Client -> FurnitureCompany: main()
+activate FurnitureCompany
+
+FurnitureCompany -> ClassicFurnitureFactory: create_chair()
+activate ClassicFurnitureFactory
+ClassicFurnitureFactory --> FurnitureCompany: ClassicChair
+deactivate ClassicFurnitureFactory
+
+FurnitureCompany -> ClassicFurnitureFactory: create_sofa()
+activate ClassicFurnitureFactory
+ClassicFurnitureFactory --> FurnitureCompany: ClassicSofa
+deactivate ClassicFurnitureFactory
+
+FurnitureCompany -> ClassicFurnitureFactory: create_coffee_table()
+activate ClassicFurnitureFactory
+ClassicFurnitureFactory --> FurnitureCompany: ClassicCoffeeTable
+deactivate ClassicFurnitureFactory
+
+FurnitureCompany -> ModernFurnitureFactory: create_chair()
+activate ModernFurnitureFactory
+ModernFurnitureFactory --> FurnitureCompany: ModernChair
+deactivate ModernFurnitureFactory
+
+FurnitureCompany -> ModernFurnitureFactory: create_sofa()
+activate ModernFurnitureFactory
+ModernFurnitureFactory --> FurnitureCompany: ModernSofa
+deactivate ModernFurnitureFactory
+
+FurnitureCompany -> ModernFurnitureFactory: create_coffee_table()
+activate ModernFurnitureFactory
+ModernFurnitureFactory --> FurnitureCompany: ModernCoffeeTable
+deactivate ModernFurnitureFactory
+
+FurnitureCompany -> VictorianFurnitureFactory: create_chair()
+activate VictorianFurnitureFactory
+VictorianFurnitureFactory --> FurnitureCompany: VictorianChair
+deactivate VictorianFurnitureFactory
+
+FurnitureCompany -> VictorianFurnitureFactory: create_sofa()
+activate VictorianFurnitureFactory
+VictorianFurnitureFactory --> FurnitureCompany: VictorianSofa
+deactivate VictorianFurnitureFactory
+
+FurnitureCompany -> VictorianFurnitureFactory: create_coffee_table()
+activate VictorianFurnitureFactory
+VictorianFurnitureFactory --> FurnitureCompany: VictorianCoffeeTable
+deactivate VictorianFurnitureFactory
+
+deactivate FurnitureCompany
+@enduml
+
+@enduml

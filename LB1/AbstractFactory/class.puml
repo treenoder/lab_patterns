@@ -72,6 +72,12 @@ class ClassicFurnitureFactory implements FurnitureFactory {
     + create_coffee_table() : CoffeeTable
 }
 
+class FurnitureCompany {
+    + present_furniture(factory : FurnitureFactory) : void
+}
+
+FurnitureCompany o-- FurnitureFactory
+
 ModernFurnitureFactory o-- ModernChair
 ModernFurnitureFactory o-- ModernSofa
 ModernFurnitureFactory o-- ModernCoffeeTable
