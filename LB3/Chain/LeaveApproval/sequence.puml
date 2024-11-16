@@ -1,0 +1,30 @@
+@startuml
+participant "LeaveRequestClient" as Client
+participant "DirectManagerApproval" as Manager
+participant "DepartmentHeadApproval" as DeptHead
+participant "HRApproval" as HR
+participant "LeaveRequest" as Request1
+participant "LeaveRequest" as Request2
+participant "LeaveRequest" as Request3
+participant "LeaveRequest" as Request4
+
+Client -> Manager: ApproveLeave(Request1)
+Manager -> Manager: Check Days <= 5
+Manager --> Client: Approve Request1
+
+Client -> Manager: ApproveLeave(Request2)
+Manager -> DeptHead: Forward Request2
+DeptHead -> DeptHead: Check 5 < Days <= 15
+DeptHead --> Client: Approve Request2
+
+Client -> Manager: ApproveLeave(Request3)
+Manager -> DeptHead: Forward Request3
+DeptHead -> HR: Forward Request3
+HR -> HR: Check Days > 15
+HR --> Client: Approve Request3
+
+Client -> Manager: ApproveLeave(Request4)
+Manager -> DeptHead: Forward Request4
+DeptHead -> DeptHead: Check 5 < Days <= 15
+DeptHead --> Client: Approve Request4
+@enduml

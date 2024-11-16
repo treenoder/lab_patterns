@@ -1,0 +1,56 @@
+@startuml
+participant "Користувач" as User
+participant "RemoteControl" as Remote
+participant "PlayVideoCommand" as PlayCmd
+participant "VideoPlayer" as Video
+participant "IncreaseVolumeCommand" as IncVolCmd
+participant "AudioSystem" as Audio
+participant "StopVideoCommand" as StopCmd
+
+User -> Remote: set_command("play", PlayCmd)
+User -> Remote: set_command("vol_up", IncVolCmd)
+User -> Remote: set_command("vol_down", DecVolCmd)
+User -> Remote: set_command("stop", StopCmd)
+
+User -> Remote: press_button("play")
+Remote -> PlayCmd: execute()
+PlayCmd -> Video: play_video("Inception")
+Video --> PlayCmd:
+PlayCmd --> Remote:
+
+User -> Remote: press_button("vol_up")
+Remote -> IncVolCmd: execute()
+IncVolCmd -> Audio: increase_volume()
+Audio --> IncVolCmd:
+IncVolCmd --> Remote:
+
+User -> Remote: press_button("vol_up")
+Remote -> IncVolCmd: execute()
+IncVolCmd -> Audio: increase_volume()
+Audio --> IncVolCmd:
+IncVolCmd --> Remote:
+
+User -> Remote: press_button("stop")
+Remote -> StopCmd: execute()
+StopCmd -> Video: stop_video()
+Video --> StopCmd:
+StopCmd --> Remote:
+
+User -> Remote: press_undo("play")
+Remote -> PlayCmd: undo()
+PlayCmd -> Video: stop_video()
+Video --> PlayCmd:
+PlayCmd --> Remote:
+
+User -> Remote: press_button("vol_down")
+Remote -> DecVolCmd: execute()
+DecVolCmd -> Audio: decrease_volume()
+Audio --> DecVolCmd:
+DecVolCmd --> Remote:
+
+User -> Remote: press_undo("vol_down")
+Remote -> DecVolCmd: undo()
+DecVolCmd -> Audio: increase_volume()
+Audio --> DecVolCmd:
+DecVolCmd --> Remote:
+@enduml

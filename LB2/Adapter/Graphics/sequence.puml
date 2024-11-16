@@ -1,0 +1,23 @@
+@startuml
+participant "GraphicsClient" as Client
+participant "LibraryAAdapter" as AdapterA
+participant "LibraryA" as LibraryA
+participant "LibraryBAdapter" as AdapterB
+participant "LibraryB" as LibraryB
+
+Client -> AdapterA: DrawLine(10, 10, 100, 100)
+AdapterA -> LibraryA: RenderLine(10, 10, 100, 100)
+LibraryA --> AdapterA: 
+
+Client -> AdapterA: DrawCircle(50, 50, 25)
+AdapterA -> LibraryA: RenderCircle(50, 50, 25)
+LibraryA --> AdapterA: 
+
+Client -> AdapterB: DrawLine(10, 10, 100, 100)
+AdapterB -> LibraryB: Draw(10, 10, 100, 100)
+LibraryB --> AdapterB: 
+
+Client -> AdapterB: DrawCircle(50, 50, 25)
+AdapterB -> LibraryB: Circle(50, 50, 25)
+LibraryB --> AdapterB: 
+@enduml

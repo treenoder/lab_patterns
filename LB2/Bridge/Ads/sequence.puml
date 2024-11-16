@@ -1,0 +1,10 @@
+@startuml
+participant Client
+participant AdCampaign
+participant AdPlatform
+
+Client -> AdCampaign: createAd("New Product Launch")
+AdCampaign -> AdPlatform: showAd("New Product Launch")
+AdPlatform --> AdCampaign: Advertisement displayed
+AdCampaign --> Client: Confirmation
+@enduml

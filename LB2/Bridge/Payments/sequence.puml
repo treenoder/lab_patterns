@@ -1,0 +1,10 @@
+@startuml
+participant Client
+participant PaymentSystem
+participant PaymentProcessor
+
+Client -> PaymentSystem: makePayment(100.00)
+PaymentSystem -> PaymentProcessor: processPayment(100.00)
+PaymentProcessor --> PaymentSystem: Payment processed
+PaymentSystem --> Client: Confirmation
+@enduml

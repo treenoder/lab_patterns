@@ -1,0 +1,28 @@
+@startuml
+participant "VideoClient" as Client
+participant "VideoFormatAdapter" as Adapter
+participant "MediaPlayer" as MediaPlayer
+
+Client -> Adapter: Play("movie.avi")
+Adapter -> Adapter: GetFormat("movie.avi")
+Adapter -> Adapter: IsSupported("AVI")
+Adapter -> MediaPlayer: PlayVideo("movie.avi", "AVI")
+MediaPlayer --> Adapter: 
+
+Client -> Adapter: Play("clip.mp4")
+Adapter -> Adapter: GetFormat("clip.mp4")
+Adapter -> Adapter: IsSupported("MP4")
+Adapter -> MediaPlayer: PlayVideo("clip.mp4", "MP4")
+MediaPlayer --> Adapter: 
+
+Client -> Adapter: Play("trailer.wmv")
+Adapter -> Adapter: GetFormat("trailer.wmv")
+Adapter -> Adapter: IsSupported("WMV")
+Adapter -> MediaPlayer: PlayVideo("trailer.wmv", "WMV")
+MediaPlayer --> Adapter: 
+
+Client -> Adapter: Play("documentary.mkv")
+Adapter -> Adapter: GetFormat("documentary.mkv")
+Adapter -> Adapter: IsSupported("MKV")
+Adapter -> Adapter: Console.WriteLine("Format MKV is not supported.")
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+participant "AccountingClient" as Client
+participant "AccountingAdapter" as Adapter
+participant "SystemA" as SystemA
+participant "SystemB" as SystemB
+
+Client -> Adapter: GetReportData()
+Adapter -> SystemA: FetchDataA()
+SystemA --> Adapter: List<AData>
+Adapter -> SystemB: GetDataB()
+SystemB --> Adapter: Dictionary<string, double>
+Adapter --> Client: List<ReportData>
+Client -> Client: ShowReport()
+@enduml

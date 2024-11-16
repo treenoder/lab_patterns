@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounting", "Accounting\Accounting.csproj", "{F002F446-5A82-43DF-8097-B3C9E6762FEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphics", "Graphics\Graphics.csproj", "{A2100449-9B77-45D3-BC60-E3683406B3FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoPlayer", "VideoPlayer\VideoPlayer.csproj", "{4A2B4B02-0778-4959-A108-A9AD3BF64299}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F002F446-5A82-43DF-8097-B3C9E6762FEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F002F446-5A82-43DF-8097-B3C9E6762FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F002F446-5A82-43DF-8097-B3C9E6762FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F002F446-5A82-43DF-8097-B3C9E6762FEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2100449-9B77-45D3-BC60-E3683406B3FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2100449-9B77-45D3-BC60-E3683406B3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2100449-9B77-45D3-BC60-E3683406B3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2100449-9B77-45D3-BC60-E3683406B3FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A2B4B02-0778-4959-A108-A9AD3BF64299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A2B4B02-0778-4959-A108-A9AD3BF64299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A2B4B02-0778-4959-A108-A9AD3BF64299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A2B4B02-0778-4959-A108-A9AD3BF64299}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,54 @@
+@startuml
+interface Command {
+    +execute(): void
+    +undo(): void
+}
+
+class PlayVideoCommand implements Command {
+    -video_player: VideoPlayer
+    -video_name: str
+    +execute(): void
+    +undo(): void
+}
+
+class StopVideoCommand implements Command {
+    -video_player: VideoPlayer
+    +execute(): void
+    +undo(): void
+}
+
+class IncreaseVolumeCommand implements Command {
+    -audio_system: AudioSystem
+    +execute(): void
+    +undo(): void
+}
+
+class DecreaseVolumeCommand implements Command {
+    -audio_system: AudioSystem
+    +execute(): void
+    +undo(): void
+}
+
+class VideoPlayer {
+    +play_video(video_name: str): void
+    +stop_video(): void
+}
+
+class AudioSystem {
+    +increase_volume(): void
+    +decrease_volume(): void
+}
+
+class RemoteControl {
+    -commands: dict
+    +set_command(button: str, command: Command): void
+    +press_button(button: str): void
+    +press_undo(button: str): void
+}
+
+PlayVideoCommand --> VideoPlayer
+StopVideoCommand --> VideoPlayer
+IncreaseVolumeCommand --> AudioSystem
+DecreaseVolumeCommand --> AudioSystem
+RemoteControl --> Command
+@enduml

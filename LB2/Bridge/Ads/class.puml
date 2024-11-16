@@ -1,0 +1,34 @@
+@startuml
+interface AdPlatform {
+    +showAd(content: String): void
+}
+
+class WebAdPlatform implements AdPlatform {
+    +showAd(content: String): void
+}
+
+class MobileAdPlatform implements AdPlatform {
+    +showAd(content: String): void
+}
+
+class TvAdPlatform implements AdPlatform {
+    +showAd(content: String): void
+}
+
+abstract class AdCampaign {
+    protected AdPlatform platform
+    +AdCampaign(platform: AdPlatform)
+    +createAd(content: String): void
+}
+
+class OnlineAdCampaign extends AdCampaign {
+    +createAd(content: String): void
+}
+
+class TvAdCampaign extends AdCampaign {
+    +createAd(content: String): void
+}
+
+
+AdCampaign --> AdPlatform
+@enduml

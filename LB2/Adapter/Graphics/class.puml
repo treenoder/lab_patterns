@@ -1,0 +1,37 @@
+@startuml
+interface ICommonGraphics {
+    +DrawLine(int x1, int y1, int x2, int y2)
+    +DrawCircle(int centerX, int centerY, int radius)
+}
+
+class LibraryA {
+    +RenderLine(int startX, int startY, int endX, int endY)
+    +RenderCircle(int x, int y, int r)
+}
+
+class LibraryB {
+    +Draw(int x1, int y1, int x2, int y2)
+    +Circle(int centerX, int centerY, int radius)
+}
+
+class LibraryAAdapter implements ICommonGraphics {
+    -LibraryA libraryA
+    +DrawLine(int x1, int y1, int x2, int y2)
+    +DrawCircle(int centerX, int centerY, int radius)
+}
+
+class LibraryBAdapter implements ICommonGraphics {
+    -LibraryB libraryB
+    +DrawLine(int x1, int y1, int x2, int y2)
+    +DrawCircle(int centerX, int centerY, int radius)
+}
+
+class GraphicsClient {
+    -ICommonGraphics graphics
+    +DrawShapes(): void
+}
+
+LibraryAAdapter --> LibraryA
+LibraryBAdapter --> LibraryB
+GraphicsClient --> ICommonGraphics
+@enduml

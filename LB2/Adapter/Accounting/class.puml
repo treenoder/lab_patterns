@@ -1,0 +1,38 @@
+@startuml
+interface IAccountingReport {
+    +List<ReportData> GetReportData()
+}
+
+class ReportData {
+    +string AccountName
+    +decimal Amount
+}
+
+class SystemA {
+    +List<AData> FetchDataA()
+}
+
+class AData {
+    +string Account
+    +decimal Value
+}
+
+class SystemB {
+    +Dictionary<string, double> GetDataB()
+}
+
+class AccountingAdapter implements IAccountingReport {
+    -SystemA systemA
+    -SystemB systemB
+    +GetReportData(): List<ReportData>
+}
+
+class AccountingClient {
+    -IAccountingReport report
+    +ShowReport(): void
+}
+
+AccountingAdapter --> SystemA
+AccountingAdapter --> SystemB
+AccountingClient --> IAccountingReport
+@enduml

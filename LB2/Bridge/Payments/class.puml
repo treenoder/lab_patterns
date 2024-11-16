@@ -1,0 +1,29 @@
+@startuml
+interface PaymentProcessor {
+    +processPayment(amount: Double): void
+}
+
+class CreditCardProcessor implements PaymentProcessor {
+    +processPayment(amount: Double): void
+}
+
+class PaypalProcessor implements PaymentProcessor {
+    +processPayment(amount: Double): void
+}
+
+class CryptoProcessor implements PaymentProcessor {
+    +processPayment(amount: Double): void
+}
+
+abstract class PaymentSystem {
+    protected PaymentProcessor processor
+    +PaymentSystem(processor: PaymentProcessor)
+    +makePayment(amount: Double): void
+}
+
+class OnlinePaymentSystem extends PaymentSystem {
+    +makePayment(amount: Double): void
+}
+
+PaymentSystem --> PaymentProcessor
+@enduml

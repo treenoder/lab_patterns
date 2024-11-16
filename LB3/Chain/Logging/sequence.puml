@@ -1,0 +1,26 @@
+@startuml
+participant "LoggerClient" as Client
+participant "InfoLogger" as Info
+participant "WarningLogger" as Warning
+participant "ErrorLogger" as Error
+
+Client -> Info: LogMessage(1, "Це інформаційне повідомлення.")
+Info -> Info: Check level == INFO
+Info --> Client: INFO: Це інформаційне повідомлення.
+
+Client -> Info: LogMessage(2, "Це попереджувальне повідомлення.")
+Info -> Warning: Forward message
+Warning -> Warning: Check level == WARNING
+Warning --> Client: WARNING: Це попереджувальне повідомлення.
+
+Client -> Info: LogMessage(3, "Це критичне повідомлення.")
+Info -> Warning: Forward message
+Warning -> Error: Forward message
+Error -> Error: Check level == ERROR
+Error --> Client: ERROR: Це критичне повідомлення.
+
+Client -> Info: LogMessage(4, "Це повідомлення невідомого рівня.")
+Info -> Warning: Forward message
+Warning -> Error: Forward message
+Error -> Error: Check level == ERROR
+@enduml

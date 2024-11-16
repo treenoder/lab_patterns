@@ -1,0 +1,33 @@
+@startuml
+interface DataFormat {
+    +readData(): void
+    +processData(): void
+}
+
+class CSVData implements DataFormat {
+    +readData(): void
+    +processData(): void
+}
+
+class XMLData implements DataFormat {
+    +readData(): void
+    +processData(): void
+}
+
+class JSONData implements DataFormat {
+    +readData(): void
+    +processData(): void
+}
+
+abstract class DataAnalyzer {
+    protected DataFormat format
+    +DataAnalyzer(format: DataFormat)
+    +analyze(): void
+}
+
+class BiologicalDataAnalyzer extends DataAnalyzer {
+    +analyze(): void
+}
+
+DataAnalyzer --> DataFormat
+@enduml

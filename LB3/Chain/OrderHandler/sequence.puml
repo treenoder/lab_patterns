@@ -1,0 +1,29 @@
+@startuml
+participant "OrderProcessingClient" as Client
+participant "BasicOrderHandler" as BasicHandler
+participant "AdvancedOrderHandler" as AdvancedHandler
+participant "PremiumOrderHandler" as PremiumHandler
+participant "Order" as Order1
+participant "Order" as Order2
+participant "Order" as Order3
+participant "Order" as Order4
+
+Client -> BasicHandler: HandleOrder(Order1)
+BasicHandler -> BasicHandler: Check Order1.Amount <= 1000
+BasicHandler --> Client: Обробка замовлення №1
+
+Client -> BasicHandler: HandleOrder(Order2)
+BasicHandler -> AdvancedHandler: Forward Order2
+AdvancedHandler -> AdvancedHandler: Check 1000 < Order2.Amount <= 5000
+AdvancedHandler --> Client: Обробка замовлення №2
+
+Client -> BasicHandler: HandleOrder(Order3)
+BasicHandler -> AdvancedHandler: Forward Order3
+AdvancedHandler -> PremiumHandler: Forward Order3
+PremiumHandler -> PremiumHandler: Check Order3.Amount > 5000
+PremiumHandler --> Client: Обробка замовлення №3
+
+Client -> BasicHandler: HandleOrder(Order4)
+BasicHandler -> BasicHandler: Check Order4.Amount <= 1000
+BasicHandler --> Client: Обробка замовлення №4
+@enduml

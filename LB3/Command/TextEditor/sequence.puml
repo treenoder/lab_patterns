@@ -1,0 +1,51 @@
+@startuml
+participant "Користувач" as User
+participant "EditorController" as Controller
+participant "WriteCommand" as WriteCmd
+participant "TextEditor" as Editor
+
+User -> Controller: execute_command(writeCmd1)
+Controller -> WriteCmd: execute()
+WriteCmd -> Editor: write("Hello, ")
+Editor --> WriteCmd:
+WriteCmd --> Controller:
+
+User -> Controller: execute_command(writeCmd2)
+Controller -> WriteCmd2: execute()
+WriteCmd2 -> Editor: write("World!")
+Editor --> WriteCmd2:
+WriteCmd2 --> Controller:
+
+User -> Controller: execute_command(deleteCmd)
+Controller -> DeleteCmd: execute()
+DeleteCmd -> Editor: delete(6)
+Editor --> DeleteCmd: "World!"
+DeleteCmd --> Controller:
+
+User -> Controller: undo()
+Controller -> DeleteCmd: undo()
+DeleteCmd -> Editor: write("World!")
+Editor --> DeleteCmd:
+DeleteCmd --> Controller:
+
+User -> Controller: undo()
+Controller -> WriteCmd2: undo()
+WriteCmd2 -> Editor: delete(6)
+Editor --> WriteCmd2:
+WriteCmd2 --> Controller:
+
+User -> Controller: redo()
+Controller -> WriteCmd2: execute()
+WriteCmd2 -> Editor: write("World!")
+Editor --> WriteCmd2:
+WriteCmd2 --> Controller:
+
+User -> Controller: redo()
+Controller -> DeleteCmd: execute()
+DeleteCmd -> Editor: delete(6)
+Editor --> DeleteCmd:
+DeleteCmd --> Controller:
+
+User -> Controller: redo()
+Controller -> "Nothing to redo."
+@enduml

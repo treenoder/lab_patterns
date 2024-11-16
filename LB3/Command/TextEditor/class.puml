@@ -1,0 +1,39 @@
+@startuml
+interface Command {
+    +execute(): void
+    +undo(): void
+}
+
+class WriteCommand implements Command {
+    -editor: TextEditor
+    -content: str
+    +execute(): void
+    +undo(): void
+}
+
+class DeleteCommand implements Command {
+    -editor: TextEditor
+    -count: int
+    -deleted_text: str
+    +execute(): void
+    +undo(): void
+}
+
+class TextEditor {
+    -text: str
+    +write(content: str): void
+    +delete(count: int): str
+}
+
+class EditorController {
+    -undo_stack: list
+    -redo_stack: list
+    +execute_command(command: Command): void
+    +undo(): void
+    +redo(): void
+}
+
+WriteCommand --> TextEditor
+DeleteCommand --> TextEditor
+EditorController --> Command
+@enduml

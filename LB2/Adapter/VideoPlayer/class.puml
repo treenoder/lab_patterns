@@ -1,0 +1,22 @@
+@startuml
+interface IVideoPlayer {
+    +Play(string filename)
+}
+
+class MediaPlayer {
+    +PlayVideo(string filename, string format)
+}
+
+class VideoFormatAdapter implements IVideoPlayer {
+    -MediaPlayer mediaPlayer
+    +Play(string filename)
+}
+
+class VideoClient {
+    -IVideoPlayer player
+    +PlayVideo(string filename)
+}
+
+VideoFormatAdapter --> MediaPlayer
+VideoClient --> IVideoPlayer
+@enduml

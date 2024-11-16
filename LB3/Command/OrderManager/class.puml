@@ -1,0 +1,49 @@
+@startuml
+interface Command {
+    +execute(): void
+    +undo(): void
+}
+
+class PlaceOrderCommand implements Command {
+    -order_manager: OrderManager
+    -order_id: int
+    -details: str
+    +execute(): void
+    +undo(): void
+}
+
+class ModifyOrderCommand implements Command {
+    -order_manager: OrderManager
+    -order_id: int
+    -new_details: str
+    -old_details: str
+    +execute(): void
+    +undo(): void
+}
+
+class CancelOrderCommand implements Command {
+    -order_manager: OrderManager
+    -order_id: int
+    -details: str
+    +execute(): void
+    +undo(): void
+}
+
+class OrderManager {
+    -orders: dict
+    +place_order(order_id: int, details: str): void
+    +modify_order(order_id: int, new_details: str): str
+    +cancel_order(order_id: int): str
+}
+
+class OrderController {
+    -history: list
+    +execute_command(command: Command): void
+    +undo_last(): void
+}
+
+PlaceOrderCommand --> OrderManager
+ModifyOrderCommand --> OrderManager
+CancelOrderCommand --> OrderManager
+OrderController --> Command
+@enduml

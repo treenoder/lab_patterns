@@ -1,0 +1,39 @@
+@startuml
+abstract class OrderHandler {
+    - OrderHandler nextHandler
+    + SetNext(OrderHandler nextHandler)
+    + HandleOrder(Order order)
+}
+
+class BasicOrderHandler {
+    + HandleOrder(Order order)
+}
+
+class AdvancedOrderHandler {
+    + HandleOrder(Order order)
+}
+
+class PremiumOrderHandler {
+    + HandleOrder(Order order)
+}
+
+OrderHandler <|-- BasicOrderHandler
+OrderHandler <|-- AdvancedOrderHandler
+OrderHandler <|-- PremiumOrderHandler
+
+class Order {
+    + int OrderId
+    + decimal Amount
+    + Order(int orderId, decimal amount)
+}
+
+class OrderProcessingClient {
+    - OrderHandler handlerChain
+    + ProcessOrder(Order order)
+}
+
+OrderProcessingClient --> OrderHandler
+
+BasicOrderHandler --> AdvancedOrderHandler
+AdvancedOrderHandler --> PremiumOrderHandler
+@enduml

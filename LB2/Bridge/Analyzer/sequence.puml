@@ -1,0 +1,12 @@
+@startuml
+participant Researcher
+participant DataAnalyzer
+participant DataFormat
+
+Researcher -> DataAnalyzer: analyze()
+DataAnalyzer -> DataFormat: readData()
+DataFormat --> DataAnalyzer: Data read
+DataAnalyzer -> DataFormat: processData()
+DataFormat --> DataAnalyzer: Data processed
+DataAnalyzer --> Researcher: Analysis results
+@enduml

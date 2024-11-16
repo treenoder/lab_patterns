@@ -1,0 +1,45 @@
+@startuml
+participant "Персонал" as Staff
+participant "OrderController" as Controller
+participant "PlaceOrderCommand" as PlaceCmd
+participant "OrderManager" as Manager
+
+Staff -> Controller: execute_command(placeCmd)
+Controller -> PlaceCmd: execute()
+PlaceCmd -> Manager: place_order(1, "Pizza Margherita")
+Manager --> PlaceCmd: Order placed
+PlaceCmd --> Controller:
+
+Staff -> Controller: execute_command(modifyCmd)
+Controller -> ModifyCmd: execute()
+ModifyCmd -> Manager: modify_order(1, "Pizza Pepperoni")
+Manager --> ModifyCmd: Old details
+ModifyCmd --> Controller:
+
+Staff -> Controller: execute_command(cancelCmd)
+Controller -> CancelCmd: execute()
+CancelCmd -> Manager: cancel_order(1)
+Manager --> CancelCmd: Order canceled
+CancelCmd --> Controller:
+
+Staff -> Controller: undo_last()
+Controller -> CancelCmd: undo()
+CancelCmd -> Manager: place_order(1, "Pizza Pepperoni")
+Manager --> CancelCmd: Order placed
+CancelCmd --> Controller:
+
+Staff -> Controller: undo_last()
+Controller -> ModifyCmd: undo()
+ModifyCmd -> Manager: modify_order(1, "Pizza Margherita")
+Manager --> ModifyCmd: Old details
+ModifyCmd --> Controller:
+
+Staff -> Controller: undo_last()
+Controller -> PlaceCmd: undo()
+PlaceCmd -> Manager: cancel_order(1)
+Manager --> PlaceCmd: Order canceled
+PlaceCmd --> Controller:
+
+Staff -> Controller: undo_last()
+Controller -> "No commands to undo."
+@enduml

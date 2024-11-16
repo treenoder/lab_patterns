@@ -1,0 +1,33 @@
+@startuml
+abstract class Logger {
+    - Logger nextLogger
+    + SetNext(Logger nextLogger)
+    + LogMessage(int level, string message)
+}
+
+class InfoLogger {
+    + LogMessage(int level, string message)
+}
+
+class WarningLogger {
+    + LogMessage(int level, string message)
+}
+
+class ErrorLogger {
+    + LogMessage(int level, string message)
+}
+
+Logger <|-- InfoLogger
+Logger <|-- WarningLogger
+Logger <|-- ErrorLogger
+
+class LoggerClient {
+    - Logger loggerChain
+    + Log(int level, string message)
+}
+
+LoggerClient --> Logger
+
+InfoLogger --> WarningLogger
+WarningLogger --> ErrorLogger
+@enduml

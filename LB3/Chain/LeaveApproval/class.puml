@@ -1,0 +1,39 @@
+@startuml
+abstract class LeaveRequestHandler {
+    - LeaveRequestHandler nextHandler
+    + SetNext(LeaveRequestHandler nextHandler)
+    + ApproveLeave(LeaveRequest request)
+}
+
+class DirectManagerApproval {
+    + ApproveLeave(LeaveRequest request)
+}
+
+class DepartmentHeadApproval {
+    + ApproveLeave(LeaveRequest request)
+}
+
+class HRApproval {
+    + ApproveLeave(LeaveRequest request)
+}
+
+LeaveRequestHandler <|-- DirectManagerApproval
+LeaveRequestHandler <|-- DepartmentHeadApproval
+LeaveRequestHandler <|-- HRApproval
+
+class LeaveRequest {
+    + string EmployeeName
+    + int Days
+    + LeaveRequest(string employeeName, int days)
+}
+
+class LeaveRequestClient {
+    - LeaveRequestHandler handlerChain
+    + SubmitRequest(LeaveRequest request)
+}
+
+LeaveRequestClient --> LeaveRequestHandler
+
+DirectManagerApproval --> DepartmentHeadApproval
+DepartmentHeadApproval --> HRApproval
+@enduml
