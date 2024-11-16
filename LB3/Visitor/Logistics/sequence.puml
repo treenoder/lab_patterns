@@ -1,0 +1,23 @@
+@startuml
+actor User
+participant "Cargo" as Cargo
+participant "TransportMode" as TM
+participant "ShippingCostCalculator" as CostCalc
+participant "TransitTimeEstimator" as TimeEst
+
+User -> Cargo: Accept(ShippingCostCalculator)
+Cargo -> CostCalc: Visit(Cargo)
+CostCalc --> Cargo: Calculate Cost
+
+User -> TM: Accept(ShippingCostCalculator)
+TM -> CostCalc: Visit(TransportMode)
+CostCalc --> TM: Calculate Cost
+
+User -> Cargo: Accept(TransitTimeEstimator)
+Cargo -> TimeEst: Visit(Cargo)
+TimeEst --> Cargo: Process Transit Time
+
+User -> TM: Accept(TransitTimeEstimator)
+TM -> TimeEst: Visit(TransportMode)
+TimeEst --> TM: Calculate Transit Time
+@enduml

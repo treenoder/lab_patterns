@@ -1,0 +1,57 @@
+@startuml
+interface IOrderComponent {
+    +Accept(visitor: IOrderVisitor): void
+}
+
+class FoodItem {
+    +Name: string
+    +Price: double
+    +Accept(visitor: IOrderVisitor): void
+}
+
+class BeverageItem {
+    +Name: string
+    +Price: double
+    +Accept(visitor: IOrderVisitor): void
+}
+
+class Order {
+    +Items: List<IOrderComponent>
+    +Accept(visitor: IOrderVisitor): void
+}
+
+interface IOrderVisitor {
+    +Visit(food: FoodItem): void
+    +Visit(beverage: BeverageItem): void
+    +Visit(order: Order): void
+}
+
+class OrderProcessor {
+    +Visit(food: FoodItem): void
+    +Visit(beverage: BeverageItem): void
+    +Visit(order: Order): void
+}
+
+class CostCalculator {
+    +TotalCost: double
+    +Visit(food: FoodItem): void
+    +Visit(beverage: BeverageItem): void
+    +Visit(order: Order): void
+}
+
+class BillGenerator {
+    +Visit(food: FoodItem): void
+    +Visit(beverage: BeverageItem): void
+    +Visit(order: Order): void
+}
+
+IOrderComponent <|.. FoodItem
+IOrderComponent <|.. BeverageItem
+IOrderComponent <|.. Order
+IOrderVisitor <|.. OrderProcessor
+IOrderVisitor <|.. CostCalculator
+IOrderVisitor <|.. BillGenerator
+FoodItem --> IOrderVisitor : Accept
+BeverageItem --> IOrderVisitor : Accept
+Order --> IOrderVisitor : Accept
+@enduml

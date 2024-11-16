@@ -1,0 +1,39 @@
+@startuml
+actor User
+participant "Order" as Order
+participant "FoodItem" as Food
+participant "BeverageItem" as Beverage
+participant "OrderProcessor" as Processor
+participant "CostCalculator" as CostCalc
+participant "BillGenerator" as BillGen
+
+User -> Order: Accept(OrderProcessor)
+Order -> Food: Accept(Processor)
+Food -> Processor: Visit(FoodItem)
+Processor --> Food: Processed
+Order -> Beverage: Accept(Processor)
+Beverage -> Processor: Visit(BeverageItem)
+Processor --> Beverage: Processed
+Order -> Processor: Visit(Order)
+Processor --> Order: Processing Complete
+
+User -> Order: Accept(CostCalculator)
+Order -> Food: Accept(CostCalc)
+Food -> CostCalc: Visit(FoodItem)
+CostCalc --> Food: Added to Total
+Order -> Beverage: Accept(CostCalc)
+Beverage -> CostCalc: Visit(BeverageItem)
+CostCalc --> Beverage: Added to Total
+Order -> CostCalc: Visit(Order)
+CostCalc --> Order: Display Total Cost
+
+User -> Order: Accept(BillGenerator)
+Order -> Food: Accept(BillGen)
+Food -> BillGen: Visit(FoodItem)
+BillGen --> Food: Listed
+Order -> Beverage: Accept(BillGen)
+Beverage -> BillGen: Visit(BeverageItem)
+BillGen --> Beverage: Listed
+Order -> BillGen: Visit(Order)
+BillGen --> Order: Bill Generated
+@enduml

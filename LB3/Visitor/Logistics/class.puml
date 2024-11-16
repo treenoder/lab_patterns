@@ -1,0 +1,40 @@
+@startuml
+interface ILogisticsOperation {
+    +Accept(visitor: ILogisticsVisitor): void
+}
+
+class Cargo {
+    +Weight: double
+    +Destination: string
+    +Accept(visitor: ILogisticsVisitor): void
+}
+
+class TransportMode {
+    +Mode: string
+    +Accept(visitor: ILogisticsVisitor): void
+}
+
+interface ILogisticsVisitor {
+    +Visit(cargo: Cargo): void
+    +Visit(transportMode: TransportMode): void
+}
+
+class ShippingCostCalculator {
+    +TotalCost: double
+    +Visit(cargo: Cargo): void
+    +Visit(transportMode: TransportMode): void
+}
+
+class TransitTimeEstimator {
+    +TotalTime: double
+    +Visit(cargo: Cargo): void
+    +Visit(transportMode: TransportMode): void
+}
+
+ILogisticsOperation <|.. Cargo
+ILogisticsOperation <|.. TransportMode
+ILogisticsVisitor <|.. ShippingCostCalculator
+ILogisticsVisitor <|.. TransitTimeEstimator
+Cargo --> ILogisticsVisitor : Accept
+TransportMode --> ILogisticsVisitor : Accept
+@enduml

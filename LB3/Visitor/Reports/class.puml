@@ -1,0 +1,39 @@
+@startuml
+interface IFinancialReport {
+    +Accept(visitor: IFinancialReportVisitor): void
+}
+
+class IncomeStatement {
+    +Revenue: double
+    +Expenses: double
+    +Accept(visitor: IFinancialReportVisitor): void
+}
+
+class BalanceSheet {
+    +Assets: double
+    +Liabilities: double
+    +Accept(visitor: IFinancialReportVisitor): void
+}
+
+interface IFinancialReportVisitor {
+    +Visit(incomeStatement: IncomeStatement): void
+    +Visit(balanceSheet: BalanceSheet): void
+}
+
+class TaxAuditVisitor {
+    +Visit(incomeStatement: IncomeStatement): void
+    +Visit(balanceSheet: BalanceSheet): void
+}
+
+class InvestmentAnalysisVisitor {
+    +Visit(incomeStatement: IncomeStatement): void
+    +Visit(balanceSheet: BalanceSheet): void
+}
+
+IFinancialReport <|.. IncomeStatement
+IFinancialReport <|.. BalanceSheet
+IFinancialReportVisitor <|.. TaxAuditVisitor
+IFinancialReportVisitor <|.. InvestmentAnalysisVisitor
+IncomeStatement --> IFinancialReportVisitor : Accept
+BalanceSheet --> IFinancialReportVisitor : Accept
+@enduml

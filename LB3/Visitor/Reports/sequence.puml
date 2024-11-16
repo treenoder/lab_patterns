@@ -1,0 +1,23 @@
+@startuml
+actor User
+participant "IncomeStatement" as IS
+participant "BalanceSheet" as BS
+participant "TaxAuditVisitor" as Tax
+participant "InvestmentAnalysisVisitor" as Investment
+
+User -> IS: Accept(TaxAuditVisitor)
+IS -> Tax: Visit(IncomeStatement)
+Tax --> IS: Process Tax Audit
+
+User -> BS: Accept(TaxAuditVisitor)
+BS -> Tax: Visit(BalanceSheet)
+Tax --> BS: Process Tax Audit
+
+User -> IS: Accept(InvestmentAnalysisVisitor)
+IS -> Investment: Visit(IncomeStatement)
+Investment --> IS: Process Investment Analysis
+
+User -> BS: Accept(InvestmentAnalysisVisitor)
+BS -> Investment: Visit(BalanceSheet)
+Investment --> BS: Process Investment Analysis
+@enduml
