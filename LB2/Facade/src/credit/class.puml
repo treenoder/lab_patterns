@@ -1,0 +1,28 @@
+@startuml
+' Підсистема 1: Перевірка кредитоспроможності
+class CreditScoreService {
+    +getCreditScore(customerId: String): int
+}
+
+' Підсистема 2: Перевірка історії кредитів
+class CreditHistoryService {
+    +getCreditHistory(customerId: String): String
+}
+
+' Підсистема 3: Оформлення заявки на кредит
+class LoanApplicationService {
+    +applyForLoan(customerId: String, amount: double): void
+}
+
+' Фасад
+class CreditServiceFacade {
+    -creditScoreService: CreditScoreService
+    -creditHistoryService: CreditHistoryService
+    -loanApplicationService: LoanApplicationService
+    +processLoanApplication(customerId: String, amount: double): void
+}
+
+CreditServiceFacade --> CreditScoreService
+CreditServiceFacade --> CreditHistoryService
+CreditServiceFacade --> LoanApplicationService
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+' Підсистема 1: Обробка замовлень
+class OrderService {
+    +createOrder(productId: String, quantity: int): void
+}
+
+' Підсистема 2: Управління складськими запасами
+class InventoryService {
+    +updateInventory(productId: String, quantity: int): void
+}
+
+' Підсистема 3: Організація доставки
+class ShippingService {
+    +arrangeShipping(productId: String, quantity: int): void
+}
+
+' Фасад
+class OrderManagementFacade {
+    -orderService: OrderService
+    -inventoryService: InventoryService
+    -shippingService: ShippingService
+    +processOrder(productId: String, quantity: int): void
+}
+
+OrderManagementFacade --> OrderService
+OrderManagementFacade --> InventoryService
+OrderManagementFacade --> ShippingService
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+actor Customer
+participant "OrderManagementFacade" as Facade
+participant "OrderService" as OrderSvc
+participant "InventoryService" as InventorySvc
+participant "ShippingService" as ShippingSvc
+
+Customer -> Facade: processOrder(productId, quantity)
+Facade -> OrderSvc: createOrder(productId, quantity)
+OrderSvc --> Facade:
+Facade -> InventorySvc: updateInventory(productId, quantity)
+InventorySvc --> Facade:
+Facade -> ShippingSvc: arrangeShipping(productId, quantity)
+ShippingSvc --> Facade:
+Facade -> Customer: Order processed successfully
+@enduml

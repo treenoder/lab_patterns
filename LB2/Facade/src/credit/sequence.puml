@@ -1,0 +1,16 @@
+@startuml
+actor Customer
+participant "CreditServiceFacade" as Facade
+participant "CreditScoreService" as ScoreService
+participant "CreditHistoryService" as HistoryService
+participant "LoanApplicationService" as LoanService
+
+Customer -> Facade: processLoanApplication(customerId, amount)
+Facade -> ScoreService: getCreditScore(customerId)
+ScoreService --> Facade: score
+Facade -> HistoryService: getCreditHistory(customerId)
+HistoryService --> Facade: history
+Facade -> LoanService: applyForLoan(customerId, amount)
+LoanService --> Facade:
+Facade -> Customer: Loan approved or denied
+@enduml

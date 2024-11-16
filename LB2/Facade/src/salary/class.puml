@@ -1,0 +1,28 @@
+@startuml
+' Підсистема 1: Розрахунок базової зарплати
+class SalaryCalculator {
+    +calculateBaseSalary(employeeId: String): double
+}
+
+' Підсистема 2: Розрахунок податків
+class TaxCalculator {
+    +calculateTaxes(baseSalary: double): double
+}
+
+' Підсистема 3: Розрахунок відрахувань до фондів
+class DeductionCalculator {
+    +calculateDeductions(baseSalary: double): double
+}
+
+' Фасад
+class PayrollFacade {
+    -salaryCalculator: SalaryCalculator
+    -taxCalculator: TaxCalculator
+    -deductionCalculator: DeductionCalculator
+    +processPayroll(employeeId: String): void
+}
+
+PayrollFacade --> SalaryCalculator
+PayrollFacade --> TaxCalculator
+PayrollFacade --> DeductionCalculator
+@enduml

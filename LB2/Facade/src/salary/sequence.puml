@@ -1,0 +1,16 @@
+@startuml
+actor HR_Manager
+participant "PayrollFacade" as Facade
+participant "SalaryCalculator" as SalaryCalc
+participant "TaxCalculator" as TaxCalc
+participant "DeductionCalculator" as DeductionCalc
+
+HR_Manager -> Facade: processPayroll(employeeId)
+Facade -> SalaryCalc: calculateBaseSalary(employeeId)
+SalaryCalc --> Facade: baseSalary
+Facade -> TaxCalc: calculateTaxes(baseSalary)
+TaxCalc --> Facade: taxes
+Facade -> DeductionCalc: calculateDeductions(baseSalary)
+DeductionCalc --> Facade: deductions
+Facade -> HR_Manager: Net Salary
+@enduml
