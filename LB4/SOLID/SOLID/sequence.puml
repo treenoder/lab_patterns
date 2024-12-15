@@ -1,0 +1,26 @@
+@startuml
+actor Користувач
+participant "User" as User
+participant "BalanceService" as BalanceService
+participant "TransactionRepository" as Repo
+participant "ReportService" as ReportService
+
+Користувач -> User : Deposit(1000)
+User -> BalanceService : Deposit(1000)
+BalanceService -> Repo : AddTransaction(DepositTransaction)
+Repo --> BalanceService : 
+BalanceService --> User : 
+
+Користувач -> User : Withdraw(250)
+User -> BalanceService : Withdraw(250)
+BalanceService -> Repo : AddTransaction(WithdrawalTransaction)
+Repo --> BalanceService : 
+BalanceService --> User : 
+
+Користувач -> User : GenerateReport()
+User -> ReportService : GenerateReport()
+ReportService -> Repo : GetAllTransactions()
+Repo --> ReportService : List<ITransaction>
+ReportService --> User : 
+
+@enduml

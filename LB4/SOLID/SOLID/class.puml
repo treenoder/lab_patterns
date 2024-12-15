@@ -1,0 +1,83 @@
+@startuml
+interface ITransaction {
+    +Guid Id
+    +DateTime Date
+    +decimal Amount
+    +string Type
+}
+
+class DepositTransaction {
+    -Guid Id
+    -DateTime Date
+    -decimal Amount
+    +string Type
+    +DepositTransaction(decimal amount)
+}
+
+class WithdrawalTransaction {
+    -Guid Id
+    -DateTime Date
+    -decimal Amount
+    +string Type
+    +WithdrawalTransaction(decimal amount)
+}
+
+ITransaction <|.. DepositTransaction
+ITransaction <|.. WithdrawalTransaction
+
+interface ITransactionRepository {
+    +void AddTransaction(ITransaction transaction)
+    +IEnumerable<ITransaction> GetAllTransactions()
+}
+
+class TransactionRepository {
+    -List<ITransaction> _transactions
+    +void AddTransaction(ITransaction transaction)
+    +IEnumerable<ITransaction> GetAllTransactions()
+}
+
+ITransactionRepository <|.. TransactionRepository
+
+
+interface IBalanceService {
+    +decimal GetBalance()
+    +void Deposit(decimal amount)
+    +void Withdraw(decimal amount)
+}
+
+class BalanceService {
+    -decimal _balance
+    -ITransactionRepository _transactionRepository
+    +decimal GetBalance()
+    +void Deposit(decimal amount)
+    +void Withdraw(decimal amount)
+}
+
+IBalanceService <|.. BalanceService
+
+interface IReportService {
+    +void GenerateReport()
+}
+
+class ReportService {
+    -ITransactionRepository _transactionRepository
+    +void GenerateReport()
+}
+
+IReportService <|.. ReportService
+
+class User {
+    -string Name
+    -IBalanceService BalanceService
+    -IReportService ReportService
+    +User(string name, IBalanceService balanceService, IReportService reportService)
+}
+
+User --> IBalanceService
+User --> IReportService
+
+class Program {
+    +static void Main(string[] args)
+}
+
+@enduml
